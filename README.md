@@ -30,7 +30,7 @@
 ---
 > Step 4: Launch your Python 3 virtual environment, here the name of my virtual environment will be env3
 * `virtualenv -p python3 <name-env>` or
-* `> python3 -m venv <name-env>` (work for me)
+* `python3 -m venv <name-env>` (work for me)
 > Step 5: Activate your new Python 3 environment. There are two ways to do this
 * `---> (dote forward) . <name-env>/bin/activate` or
 *  `source <name-env>/bin/activate` which does exactly the same thing

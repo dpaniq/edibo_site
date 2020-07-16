@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        {% include 'navbar.html' %}
+        {% include 'navbar.jinja' %}
 
         <hr>
         {% with messages = get_flashed_messages() %}
@@ -30,6 +30,6 @@
         {% block content %}
             {% block side %}{% endblock %}
         {% endblock %}
-        {% include 'footer.html' %}
+        {% include 'footer.jinja' %}
     </body>
 </html>

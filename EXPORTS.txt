@@ -1,0 +1,4 @@
+Inside venv:
+
+export FLASK_APP=edibo_site.py -> probably as entry_point
+

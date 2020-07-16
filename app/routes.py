@@ -8,7 +8,7 @@ from app.forms import LoginForm
 @app.route('/index')
 def index():
     user = {'username': "Mock"}
-    return render_template('index.html', title='Index page', user=user)
+    return render_template('index.jinja', title='Index page', user=user)
 
 
 @app.route('/login')
@@ -20,6 +20,6 @@ def login():
 
     else:
         print('trololo')
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('login.jinja', title='Sign In', form=form)
 
 # https://pynative.com/python-generate-random-string/
