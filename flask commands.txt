@@ -1,0 +1,17 @@
+https://flask-sqlalchemy.palletsprojects.com/en/2.x/
+
+export FLASK_APP=edibo_site.py
+export FLASK_ENV=development
+
+DB:
+flask db init -> create db
+flask db migrate -m "users table" -> create migrations scripts
+flask db upgrade -> create migratations in db
+
+DB querys:
+>>> u = User(username='*', email='*')
+>>> db.session.add(u)
+>>> db.session.commit() 
+
+User.query.all()
+User.query.get()
