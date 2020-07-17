@@ -1,0 +1,7 @@
+{% extends 'base.jinja' %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <pre>{{ post.body }}</pre>
+    {{ post.created }}
+{% endblock %}

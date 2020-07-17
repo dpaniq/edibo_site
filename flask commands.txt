@@ -11,7 +11,30 @@ flask db upgrade -> create migratations in db
 DB querys:
 >>> u = User(username='*', email='*')
 >>> db.session.add(u)
->>> db.session.commit() 
+>>> db.session.commit()
 
-User.query.all()
-User.query.get()
+FIRST TIME
+1. Create class with model
+2. import models (FROM MODEL DIRECTORY)
+   from <app> import db
+   db.create_all()
+
+   p = <ModelClassName>(*args)
+   db.session.add(p)
+   db.session.commit(p)
+
+
+
+Methods:
+<model>.query.all()
+<model>.query.get()
+<model>.query.filter(<model>.<props>.contains('<arg>')).all() / first()
+<model>query.filter(<model>.<props>=='<arg>').all() / first()
+
+
+
+When install "Flask Manager"
+Manager (from bash):
+python manage.py db init - First snapshot
+python manage.py db migrate
+python manage.py db upgrade
