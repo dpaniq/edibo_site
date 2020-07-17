@@ -27,6 +27,7 @@ FIRST TIME
 
 Methods:
 <model>.query.all()
+<model>.query.get_all([<object inheritance>, ..])
 <model>.query.get()
 <model>.query.filter(<model>.<props>.contains('<arg>')).all() / first()
 <model>query.filter(<model>.<props>=='<arg>').all() / first()
@@ -38,3 +39,18 @@ Manager (from bash):
 python manage.py db init - First snapshot
 python manage.py db migrate
 python manage.py db upgrade
+
+
+#many to many
+>>> from app import db
+>>> from models import Post, Tag
+>>> posted = Post.query.filter(Post.id ==1)
+>>> post = posted.first()
+>>> post.tags
+[]
+
+
+
+
+
+#### Netlify - nice service for share github page
