@@ -2,32 +2,12 @@ import re
 from app import db
 from datetime import datetime
 
+
+from flask_security import UserMixin, RoleMixin
 # from app import login
 # from flask_login import UserMixin
 # from werkzeug.security import generate_password_hash, check_password_hash
 
-# class User(UserMixin, db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(64), index=True, unique=True)
-#     email = db.Column(db.String(120), index=True, unique=True)
-#     password_hash = db.Column(db.String(128))
-
-
-
-#     def set_password(self, password):
-#         self.password_hash = generate_password_hash(password)
-
-#     def check_password(self, password):
-#         return check_password_hash(self.password_hash, password)
-
-#     def __repr__(self):
-#         return '<User {}>'.format(self.username) 
-
-
-
-#     @login.user_loader
-#     def load_user(self, id):
-#         return User.query.get(int(id))
 
 def slugify(s):
     pattern = r'[^\w+]'
@@ -75,3 +55,36 @@ class Tag(db.Model):
     def __repr__(self):
         return f'<Tag{self.id} with {self.name}>'
 
+
+
+### Flask Security ###
+
+roles_users = db.Table('roles_users',
+    db.Column('user_id', db.Integer(), db.ForeignKey('user.id')),
+    db.Column('role_id', db.Integer(), db.ForeignKey('role.id'))
+)
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(120), unique=True)
+    active = db.Column(db.Boolean())
+    roles = db.relationship('Role', secondary=roles_users, backref=db.backref('users', lazy='dynamic'))
+
+    # def set_password(self, password):
+    #     self.password_hash = generate_password_hash(password)
+
+    # def check_password(self, password):
+    #     return check_password_hash(self.password_hash, password)
+
+    # def __repr__(self):
+    #     return '<User {}>'.format(self.username) 
+
+class Role(db.Model, RoleMixin):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(100), unique=True)
+    description = db.Column(db.String(255))
+
+#     @login.user_loader
+#     def load_user(self, id):
+#         return User.query.get(int(id))

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ol>
+    {% for post in pages.items %}
+
+        <li>
+            <a href="{{ url_for('posts.post_detail', slug=post.slug) }}" >{{ post.title }}</a>
+        </li>
+    {% endfor %}
+    </ol>
+
+    <ul class="pagination">
+        <li {% if not pages.has_prev %} class="disabled" {% endif %}>
+            <a href="./?page={{ pages.prev_num }}"><i class="material-icons">chevron_left</i></a>
+        </li>
+
+        {% for page in pages.iter_pages() %}
+
+            <li {% if page == pages.page %} class="active" {% else %} class="waves-effect" {% endif %}>
+                <a href="./?page={{ page }}">{{ page }}</a>
+            </li>
+
+        {% endfor %}
+
+        <li {% if not pages.has_next %} class="disabled" {% endif %}>
+            <a href="./?page={{ pages.next_num }}"><i class="material-icons">chevron_right</i></a>
+        </li>
+
+      </ul>
+
+{% endblock %}
+

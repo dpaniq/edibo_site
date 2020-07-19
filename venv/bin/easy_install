@@ -1,4 +1,4 @@
-#!/home/dpaniq/Documents/pythons/edibo_site/venv/bin/python
+#!/home/dpaniq/Документы/GitHub/edibo_site/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
