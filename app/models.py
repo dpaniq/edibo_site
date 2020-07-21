@@ -84,7 +84,15 @@ class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(100), unique=True)
     description = db.Column(db.String(255))
+    
+    def __repr__(self):
+        return f'{self.name}'
 
-#     @login.user_loader
-#     def load_user(self, id):
-#         return User.query.get(int(id))
+
+class SecretKey(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    secret_key = db.Column(db.String(20), unique=True)
+    expired = db.Column(db.Boolean())
+    
+    def __repr__(self):
+        return f'{self.secret_key} - [Expired]: {self.expired}'

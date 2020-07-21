@@ -25,6 +25,8 @@ manager.add_command('db', MigrateCommand)
 from models import *
 
 admin = Admin(app)
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Role, db.session))
 admin.add_view(ModelView(Post, db.session))
 admin.add_view(ModelView(Tag, db.session))
 

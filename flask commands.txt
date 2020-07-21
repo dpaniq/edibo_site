@@ -23,8 +23,6 @@ FIRST TIME
    db.session.add(p)
    db.session.commit(p)
 
-
-
 Methods:
 <model>.query.all()
 <model>.query.get_all([<object inheritance>, ..])
