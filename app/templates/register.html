@@ -1,0 +1,10 @@
+<form method="POST" action="{{ url_for('register') }}">
+    <ul>
+        {% for field in form %}
+            <li>{{ field.label }} {{ field }}</li>
+        {% endfor %}
+    </ul>
+    
+
+    <button type=" submit">Register</button>
+</form>

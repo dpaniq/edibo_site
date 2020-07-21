@@ -6,13 +6,17 @@ from flask import request
 from flask import redirect
 from flask import url_for
 
+from flask_security import login_required
+
 from models import Post, Tag
 from .forms import PostForm
 posts = Blueprint('posts', __name__, template_folder='templates')
 
 from app import db
 
+
 @posts.route('/create', methods=['GET', 'POST'])
+@login_required
 def create_post():
     
     if request.method == 'POST':
@@ -61,6 +65,7 @@ def index():
 
 
 @posts.route('<slug>/edit', methods=['GET', 'POST'])
+@login_required
 def edit_post(slug):
     post = Post.query.filter(Post.slug == slug).first()
     

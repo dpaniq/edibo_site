@@ -67,6 +67,6 @@ BaseQuery -
 
 Imports
 
-flask-wtform - WTForms (flask) - https://wtforms.readthedocs.io/en/2.3.x/forms/#the-form-class
-flask-admin - Admin (flask) = https://flask-admin.readthedocs.io/en/latest/
-flask-security - Security = https://pythonhosted.org/Flask-Security/
+flask-wtform   - WTForms (flask) - https://wtforms.readthedocs.io/en/2.3.x/forms/#the-form-class
+flask-admin    - Admin (flask) = https://flask-admin.readthedocs.io/en/latest/
+flask-security - Security (flask) = https://pythonhosted.org/Flask-Security/
