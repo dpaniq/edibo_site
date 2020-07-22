@@ -45,24 +45,24 @@ def register():
     # if current_user.is_authenticated:
         # return redirect(url_for('index'))
     if request.method == "POST":
-        pass
-        # print('\nREQUESTS!\n', request.form, '\n', dir(request.form))
-        username = request.form['username']
         password = request.form['password']
         secret_key = request.form['secret_key']
+        email = request.form['email']
+        fullname = request.form['first_name'] + ' ' + request.form['last_name']
         
         secret = SecretKey.query.filter(SecretKey.secret_key == secret_key).first()
         if secret and secret.expired == False:
             secret.expired = True
             try:
-                user = User(email=username, password=password, active=True)
+                user = User(fullname=fullname, email=email, password=password, active=True)
                 db.session.add(user)
                 db.session.commit()
                 return redirect('/login')
             except Exception as e:
                 print(e, '\nSomething wrong with "Register"!\n')
         else: 
-            flash(f'Secret key "{secret.secret_key}" has been expired')            
+            flash(f'Secret key "{secret_key}" has been expired')
+            flash('...call to +371 29952ZzzzZzzz....')           
     form = RegisterForm()
     return render_template('register.html', title='Register', form=form)
 

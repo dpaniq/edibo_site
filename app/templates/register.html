@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block title %}
+	<h1>{{ title }}</h1>
+{% endblock %}
+
+
 {% block content %}
 
 	<!-- Errors Messages -->
@@ -17,25 +22,44 @@
 	<div class="row mt-2">
 		<form class="col s12" method="POST" action="{{ url_for('register') }}">
 			<div class="row">
-				<div class="input-field col s6">
+				<div class="input-field col s1 content-center">
+					<i class="material-icons md-48">account_circle</i>
+				</div>
+				<div class="input-field col s5">
 					<input id="first_name" type="text" class="validate", name='first_name'>
 					<label for="first_name">First Name</label>
 				</div>
-				<div class="input-field col s6">
+				<div class="input-field col s1 content-center">
+					<i class="material-icons md-48">account_box</i>
+				</div>
+				<div class="input-field col s5">
 					<input id="last_name" type="text" class="validate", name="last_name">
 					<label for="last_name">Last Name</label>
 				</div>
 			</div>
 			<div class="row">
-				<div class="input-field col s12">
+				<div class="input-field col s1 content-center">
+					<i class="material-icons md-48">mail</i>
+				</div>
+				<div class="input-field col s5">
 					<input id="email" type="email" class="validate" name="email">
 					<label for="email">Email</label>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s12">
+				<div class="input-field col s1 content-center">
+					<i class="material-icons md-48">lock</i>
+				</div>
+				<div class="input-field col s5">
 					<input id="password" type="password" class="validate" name="password">
 					<label for="password">Password</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s1 content-center">
+					<i class="material-icons md-48">vpn_key</i>
+				</div>
+				<div class="input-field col s11">
+					<input id="secret_key" type="text" class="validate" name="secret_key">
+					<label for="secret_key">Secret Key</label>
 				</div>
 			</div>
 			<div class="row">

@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block title %} 
+    <h1>{{ title }}</h1>
+{% endblock %}
+
 {% block content %}
 
 	<!-- Errors Messages -->
@@ -17,7 +21,6 @@
     <div class="row">
         <form class="col s12" method="POST" action="{{ url_for('posts.create_post') }}">
             
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <input type="hidden" name="user_id" value="{{ current_user.id }}">
 
             <div class="row">
