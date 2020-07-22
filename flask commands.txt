@@ -38,6 +38,8 @@ python manage.py db init - First snapshot
 python manage.py db migrate
 python manage.py db upgrade
 
+python manage.py db stamp heads (for fix: database is up to date)
+
 
 #many to many
 >>> from app import db

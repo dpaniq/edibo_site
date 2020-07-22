@@ -7,8 +7,9 @@ from flask import redirect
 from flask import url_for
 
 from flask_security import login_required
+from flask_security import current_user
 
-from models import Post, Tag
+from models import Post, Tag, User
 from .forms import PostForm
 posts = Blueprint('posts', __name__, template_folder='templates')
 
@@ -18,31 +19,25 @@ from app import db
 @posts.route('/create', methods=['GET', 'POST'])
 @login_required
 def create_post():
-    
     if request.method == 'POST':
-        print(request.form)
-        
-        title = request.form['title']
-        body = request.form['body']
-        
+        title = request.form['post_title']
+        body = request.form['post_body']
+
         try:
-            post = Post(title=title, body=body)
+            post = Post(title=title, body=body, author_id=int(request.form['user_id']))
             db.session.add(post)
             db.session.commit()
         except:
-            print('Something wrong with create post!')
-            
+            print('Something wrong with "Create Post!')
         return redirect(url_for('posts.index'))
     
     form = PostForm()
     return render_template('posts/create_post.html', form=form)
 
-
 @posts.route('/')
 def index():
     
     q = request.args.get('q')
-    
     page = request.args.get('page')  # ?page=<number>
     
     print('page -->', page)
@@ -70,7 +65,6 @@ def edit_post(slug):
     post = Post.query.filter(Post.slug == slug).first()
     
     if request.method == 'POST':
-        print('POST METHOD')
         form = PostForm(formdata=request.form, obj=post)
         form.populate_obj(post)
         db.session.commit()

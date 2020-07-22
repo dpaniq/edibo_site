@@ -1,20 +1,48 @@
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-    
-<form method="POST" action="{{ url_for('register') }}">
-    <ul>
-        {% for field in form %}
-            <li>{{ field.label }} {{ field }}</li>
-        {% endfor %}
-    </ul>
-    
+{% extends 'base.html' %}
 
-    <button type=" submit">Register</button>
-</form>
+{% block content %}
+
+	<!-- Errors Messages -->
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul class="collection">
+				{% for message in messages %}
+					<li class="collection-item">{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
+
+	<!-- Register Form-->
+	<div class="row mt-2">
+		<form class="col s12" method="POST" action="{{ url_for('register') }}">
+			<div class="row">
+				<div class="input-field col s6">
+					<input id="first_name" type="text" class="validate", name='first_name'>
+					<label for="first_name">First Name</label>
+				</div>
+				<div class="input-field col s6">
+					<input id="last_name" type="text" class="validate", name="last_name">
+					<label for="last_name">Last Name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="email" type="email" class="validate" name="email">
+					<label for="email">Email</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="password" type="password" class="validate" name="password">
+					<label for="password">Password</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 content-center">
+					<button class="btn waves-effect waves-light" type="submit">Register Me</button>
+				</div>
+			</div>
+		</form>
+	</div>
+{% endblock %}

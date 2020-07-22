@@ -6,7 +6,7 @@ from datetime import datetime
 from flask_security import UserMixin, RoleMixin
 # from app import login
 # from flask_login import UserMixin
-# from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 def slugify(s):
@@ -28,6 +28,8 @@ class Post(db.Model):
     slug = db.Column(db.String(140), unique=True)
     body = db.Column(db.Text)
     created = db.Column(db.DateTime, default=datetime.now())
+    
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     # many to many (+ lazy -> BaseQuery Object : for additional methods)
     tags = db.relationship('Tag', secondary=post_tags, backref=db.backref('posts', lazy='dynamic'))
@@ -66,16 +68,19 @@ roles_users = db.Table('roles_users',
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(100))
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(120), unique=True)
     active = db.Column(db.Boolean())
+    
     roles = db.relationship('Role', secondary=roles_users, backref=db.backref('users', lazy='dynamic'))
+    author = db.relationship('Post', backref='author', lazy='dynamic')
+        
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-    # def set_password(self, password):
-    #     self.password_hash = generate_password_hash(password)
-
-    # def check_password(self, password):
-    #     return check_password_hash(self.password_hash, password)
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     # def __repr__(self):
     #     return '<User {}>'.format(self.username) 

@@ -1,7 +1,25 @@
-.nav-wrapper {
-    padding: 0 3em;
-}
 
 body {
-    background: red;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1 0 auto;
+    margin-top: 2em;
+}
+
+.nav-wrapper, footer .container {
+    padding: 0 2rem;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.content-center {
+    display: flex;
+    justify-content: center;
 }

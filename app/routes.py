@@ -31,11 +31,22 @@ def index():
 #     print('pff')
 #     return render_template('security/register_user.html')
 
+@app.route('/logout')
+def logout():
+    return redirect(url_for('index'))
+
+@app.route('/login')
+@login_required
+def login():
+    return render_template('login.html')
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     # if current_user.is_authenticated:
         # return redirect(url_for('index'))
     if request.method == "POST":
+        pass
+        # print('\nREQUESTS!\n', request.form, '\n', dir(request.form))
         username = request.form['username']
         password = request.form['password']
         secret_key = request.form['secret_key']
@@ -53,15 +64,7 @@ def register():
         else: 
             flash(f'Secret key "{secret.secret_key}" has been expired')            
     form = RegisterForm()
-    # if form.validate_on_submit():
-    #     user = User.query.filter_by(username=form.username.data).first()
-    #     if user is None or not user.check_password(form.password.data):
-    #         flash('Invalid username or password')
-    #         return redirect(url_for('login'))
-    #     login_user(user, remember=form.remember_me.data)
-    #     return redirect(url_for('index'))
     return render_template('register.html', title='Register', form=form)
-
 
 @app.route('/admin/secret_key', methods=['GET', 'POST'])
 @login_required
