@@ -70,3 +70,8 @@ Imports
 flask-wtform   - WTForms (flask) - https://wtforms.readthedocs.io/en/2.3.x/forms/#the-form-class
 flask-admin    - Admin (flask) = https://flask-admin.readthedocs.io/en/latest/
 flask-security - Security (flask) = https://pythonhosted.org/Flask-Security/
+
+
+
+user_datastore - methods:
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_is_numeric', '_prepare_create_user_args', '_prepare_role_modify_args', 'activate_user', 'add_role_to_user', 'commit', 'create_role', 'create_user', 'db', 'deactivate_user', 'delete', 'delete_user', 'find_or_create_role', 'find_role', 'find_user', 'get_user', 'put', 'remove_role_from_user', 'role_model', 'toggle_active', 'user_model']

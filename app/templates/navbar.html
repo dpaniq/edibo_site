@@ -5,11 +5,11 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('index') }}">Home</a></li>
                 <li><a href=" {{ url_for('posts.index') }}">Posts</a></li>
-                {% if current_user.has_role('admin') %}
+                {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('posts.create_post') }}">Create post</a></li>
                 {% endif %}
                 
-                <li><a href="/profile/">Profile</a></li>
+                <!-- <li><a href="/profile/">Profile</a></li> -->
 
                 {% if current_user.is_authenticated %}
                     <li><a href="{{ url_for('logout') }}">Logout</a></li>

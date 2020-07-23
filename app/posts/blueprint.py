@@ -11,6 +11,8 @@ from flask_security import current_user
 
 from models import Post, Tag, User
 from .forms import PostForm
+from app import user_datastore
+
 
 from app import db
 
@@ -31,13 +33,11 @@ def create_post():
             print('Something wrong with "Create Post!')
         return redirect(url_for('posts.index'))
     
-    form = PostForm()
     title = 'Create Post'
-    return render_template('posts/create_post.html', form=form, title=title)
+    return render_template('posts/create_post.html', title=title)
 
 @posts.route('/')
 def index():
-    
     q = request.args.get('q')
     page = request.args.get('page')  # ?page=<number>
     
@@ -51,7 +51,9 @@ def index():
     else:
         posts = Post.query.order_by(Post.created.desc())   
     
+    
     for post in posts:
+        post.author_id = user_datastore.get_user(post.author_id).fullname
         post.body = post.body[0:100] + '...' if len(post.body) > 100 else post.body
     
     pages = posts.paginate(page=page, per_page=5)  # obj pagination

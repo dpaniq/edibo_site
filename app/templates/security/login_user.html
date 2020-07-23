@@ -1,22 +1,50 @@
 {% extends 'base.html' %}
 
 {% block title %}
-	<h1>{{ title }}</h1>
+	<h1>Login</h1>
 {% endblock %}
 
 {% block content %}
 
-	{% from "security/_macros.html" import render_field_with_errors, render_field %}
-	{% include "security/_messages.html" %}
-	<h1>{{ _('Login') }}</h1>
-	<form action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
-		{{ login_user_form.hidden_tag() }}
-		{{ render_field_with_errors(login_user_form.email) }}
-		{{ render_field_with_errors(login_user_form.password) }}
-		{{ render_field_with_errors(login_user_form.remember) }}
-		{{ render_field(login_user_form.next) }}
-		{{ render_field(login_user_form.submit) }}
-	</form>
-	{% include "security/_menu.html" %}
+	<!-- Errors Messages -->
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul class="collection">
+				{% for message in messages %}
+					<li class="collection-item">{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
 
-{% endblock %}
+	<!-- Login Form-->
+	<div class="row mt-2">
+		<!-- <form class="col s12" method="POST" action="{{ url_for('login') }}"> -->
+		<form class="col s12" method="POST" action="{{ url_for_security('login') }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<div class="row">
+				<div class="input-field col s1 offset-s3">
+					<i class="material-icons md-48">mail</i>
+				</div>
+				<div class="input-field col s5">
+					<input id="email" type="email" class="validate" name="email">
+					<label for="email">Email</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s1 offset-s3">
+					<i class="material-icons md-48">lock</i>
+				</div>
+				<div class="input-field col s5">
+					<input id="password" type="password" class="validate" name="password">
+					<label for="password">Password</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 content-center">
+					<button class="btn waves-effect waves-light" type="submit">Sign in</button>
+				</div>
+			</div>
+		</form>
+	</div>
+{% endblock %} -->

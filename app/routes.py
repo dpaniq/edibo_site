@@ -18,13 +18,18 @@ from models import User, SecretKey
 
 from forms import RegisterForm
 from app import db
+from app import user_datastore
 
 from functions import random_secret_key
 
 
+# @app.route('/')
+# def index():
+#     return view_index()
+
 @app.route('/')
 def index():
-    return view_index()
+    return redirect('/posts')
 
 # @app.route('/register', methods=['GET'])
 # def register():
@@ -35,10 +40,11 @@ def index():
 def logout():
     return redirect(url_for('index'))
 
-@app.route('/login')
-@login_required
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        print('sdasdadsasd!')
+    return render_template('login.html', title='Login')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -54,24 +60,25 @@ def register():
         if secret and secret.expired == False:
             secret.expired = True
             try:
-                user = User(fullname=fullname, email=email, password=password, active=True)
-                db.session.add(user)
+                # user = User(fullname=fullname, email=email, password=password, active=True)
+                # db.session.add(user)
+                # flask-security
+                user_datastore.create_user(fullname=fullname, email=email, password=password)
                 db.session.commit()
                 return redirect('/login')
             except Exception as e:
                 print(e, '\nSomething wrong with "Register"!\n')
         else: 
             flash(f'Secret key "{secret_key}" has been expired')
-            flash('...call to +371 29952ZzzzZzzz....')           
+            flash('...call to +371 29952-Zzz-zZz-zz.... :]')           
     form = RegisterForm()
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/admin/secret_key', methods=['GET', 'POST'])
 @login_required
 def secret_key():
-    print(dir(current_user))
     
-    print('ROLE', current_user.has_role('admin'), current_user.roles)
+    # print('ROLE', current_user.has_role('admin'), current_user.roles)
     
     if not current_user.has_role('admin'):
         return abort(404, description="Resource not found... Becouse your are not admin :)")

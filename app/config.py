@@ -1,4 +1,5 @@
 import os
+import bcrypt
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
@@ -16,6 +17,12 @@ class Configuration(object):
     ### Flask-security
     SECURITY_PASSWORD_SALT = 'salt'
     SECURITY_PASSWORD_HASH = 'sha512_crypt'
+    
+    # SECURITY_PASSWORD_SALT = b'$2b$12$wqKlYjmOfXPghx3FuC3Pu.'
+    # SECURITY_PASSWORD_HASH = 'bcrypt'
+    
+    # app.config['SECURITY_PASSWORD_HASH'] = 'bcrypt'
+    # app.config['SECURITY_PASSWORD_SALT'] = b'$2b$12$wqKlYjmOfXPghx3FuC3Pu.'
     
     # SECURITY_REGISTERABLE = True
     # SECURITY_REGISTER_URL = '/register'

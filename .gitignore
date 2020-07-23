@@ -1,4 +1,4 @@
-/venv
-/__pychache__
-/.idea
-
+venv/
+__pychache__/
+.idea/
+bad\ parts/

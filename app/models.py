@@ -6,6 +6,7 @@ from datetime import datetime
 from flask_security import UserMixin, RoleMixin
 # from app import login
 # from flask_login import UserMixin
+import bcrypt
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -78,16 +79,19 @@ class User(UserMixin, db.Model):
     
     def __init__(self, *args, **kwargs):
         super(User, self).__init__(*args, **kwargs)
-        self.set_password(self.password)
+        # self.set_password(self.password)
         
-    def set_password(self, password):
-        self.password = generate_password_hash(password)
+    #need @property @func.setter
+        
+    # def set_password(self, password):
+    #     self.password = generate_password_hash(password)
+        # self.password = bcrypt.hashpw(password, bcrypt.gensalt())
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username) 
+        return '<User {}>'.format(self.fullname) 
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)

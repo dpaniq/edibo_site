@@ -5,6 +5,8 @@ body {
     flex-direction: column;
 }
 
+
+
 .container {
     flex: 1 0 auto;
     margin-top: 2em;
@@ -28,6 +30,17 @@ body {
     text-align: center;
     color: rgb(214, 60, 60);
     font-weight: 200;
+}
+
+.card .card-author {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.card .card-date {
+    font-size: 16px;
+    font-weight: 300;
+    text-align: right;
 }
 
 .material-icons.md-18 { font-size: 18px; }

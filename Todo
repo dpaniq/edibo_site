@@ -1,0 +1,7 @@
+[X]registration
+[X] csrf_token()
+[X] login:
+    [X] Form
+    [X] Logic
+    [X] DB check password
+    [X] Hash password
