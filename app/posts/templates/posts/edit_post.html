@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    
     <form action="{{ url_for('posts.edit_post' , slug=post.slug )}}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-        {% for field in form %}
-            {{ field.label() }}
-            {{ field() }}
-        {% endfor %}
-        <button type="submit">Submit</button>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">title</i>
+                {{ form.title(class="materialize-textarea validate") }}
+                {{ form.title.label() }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i>
+                {{ form.body(class="materialize-textarea validate") }}
+                {{ form.body.label() }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 content-center">
+                <button class="btn waves-effect waves-light" type="submit">Save</button>
+            </div>
+        </div>
     </form>
-
 {% endblock %}

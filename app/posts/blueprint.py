@@ -73,6 +73,11 @@ def edit_post(slug):
         return redirect(url_for('posts.post_detail', slug=post.slug))
     
     form = PostForm(obj=post)
+    print(dir(form))
+    print(form.body)
+    print(form.body.label)
+    print(dir(form.body.label))
+    print(form.body)
     return render_template('posts/edit_post.html', post=post, form=form)
         
         
@@ -81,7 +86,7 @@ def post_detail(slug):
     post = Post.query.filter(Post.slug == slug).first()
     print('**** post ****\n', post)
     tags = post.tags
-    return render_template('posts/post_detail.html', post=post, tags=tags)
+    return render_template('posts/post_detail.html', post=post, tags=tags, title='Post Detail')
 
 
 @posts.route('/tag/<slug>')

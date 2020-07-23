@@ -77,9 +77,7 @@ def register():
 @app.route('/admin/secret_key', methods=['GET', 'POST'])
 @login_required
 def secret_key():
-    
-    # print('ROLE', current_user.has_role('admin'), current_user.roles)
-    
+    print(current_user.id)
     if not current_user.has_role('admin'):
         return abort(404, description="Resource not found... Becouse your are not admin :)")
         
